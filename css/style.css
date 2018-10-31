@@ -1,0 +1,541 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/*--------------------- CSS Rest End ---------------------------------*/
+body{
+   font-family:'latolight';
+   font-size: 18px;
+   width: 100%;
+   height: 100%;
+   overflow: scroll;
+}
+
+#intro, #svg-container{
+   height: 100%;
+   position: relative;
+}
+
+#intro{
+  height: 700px;
+  background-color: #1e1e1e;
+}
+
+#intro h1{
+  color: #fff;
+  font-family: 'latoregular';
+  font-size: 60px;
+  line-height: 80px;
+  position: absolute;
+  top: 160px;
+  left: 200px;
+}
+
+#intro h3{
+  color: #fff;
+  font-family: 'latolight';
+  font-size: 34px;
+  line-height: 50px;
+  position: absolute;
+  bottom: 140px;
+  right: 140px;
+}
+
+#intro h1 strong{
+  font-size: 100px;
+  color: #d64a4a;
+}
+
+nav, #map, #filterbar, #detailbar{
+   position: absolute;
+   top: 0;
+}
+
+nav{
+   width: 100%;
+   height: 70px;
+   z-index: 10;
+   background-color:rgba(0, 0, 0, 0.8);
+   color: #fff;
+   font-size: 30px;
+   text-transform: uppercase;
+   -moz-transition: -moz-transform 0.6s;
+   transition: 0.6s;
+}
+
+nav h1{
+  margin:auto;
+  width: 400px;
+  padding-top: 15px;
+
+}
+
+strong{
+   color: #D32323;
+   font-family:'latoregular';
+   font-size: 36px;
+}
+
+nav img{
+  float: left;
+  padding: 10px 20px;
+  display: none;
+  z-index: 10;
+}
+
+#filterbar, #detailbar{
+   width: 470px;
+   height: 100%;
+   right: 0;
+   background-color:rgba(0, 0, 0, 0.8);
+   -moz-perspective: 800px;
+   perspective: 800px;
+   z-index: 10;
+   color: #fff;
+   transition: 0.6s;
+}
+
+#detailbar{
+  width: 630px;
+  display: none;
+  left:0;
+  z-index: 50;
+}
+
+#map{
+   width: 100%;
+   height: 100vh;
+   overflow: hidden;
+   margin: 0 auto;
+   position: relative;
+   /*z-index: -1;*/
+}
+
+.circleMap {
+  stroke: #111111;
+  fill:#d64a4a;
+  stroke-width: 1px;
+  opacity: 0.6;
+
+}
+
+
+/*======================== filters ============================*/
+#filterbar h1{
+  font-size: 36px;
+  /*width: 300px;*/
+  margin: 10px 0 0 25px;
+  color: #d64a4a;
+  font-family: 'latoregular';
+}
+
+#reset{
+  width: 70px;
+  height: 20px;
+  float: right;
+  margin: 10px 20px 0 0;
+  border: none;
+  border-radius: 5px;
+  color: #d64a4a;
+  font-family: 'latoregular';
+  font-size: 13px;
+  background-color:rgba(255, 255, 255, 0.8);
+  transition: 0.5s;
+}
+
+#reset:hover{
+  color: #fff;
+  background-color: #d64a4a;
+}
+
+
+#f-t-l, #f-t-m, #f-t-r{
+  width: 45%;
+  float: left;
+  margin-left: 3.5%;
+  margin-top: 20px;
+  height: 20%;
+}
+
+#f-t-m{
+  width: 5%;
+  padding-top: 60px;
+  margin-left: 0;
+  height: 5%;
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+#f-t-r{
+    width: 54%;
+  /*margin-left: 0;*/
+}
+
+#f-t-l{
+  margin-left: 20px;
+  width: 30%;
+}
+
+#f-b{
+  width: 95%;
+  height: 68%;
+  float: left;
+  margin-top: 20px;
+}
+
+#star-filter, #review-filter, #cates-filter{
+  width: 100%;
+  height: 95%;
+  margin-top: 10px;
+}
+
+#f-t-l h2, #f-t-r h2, #f-b h2, #detailbar h2{
+  font-family: 'latolight';
+  font-size: 20px;
+}
+
+#f-b h2{
+  width: 45%;
+  padding-left: 20px;
+  float: left;
+}
+
+#f-b #down{
+  width: 10%;
+  padding-left: 80px;
+  font-size: 24px;
+}
+
+
+#detailbar h2{
+  width: 90%;
+  padding: 0px 0 20px 0;
+  float: left;
+}
+
+#cates-filter{
+  position: relative;
+}
+
+.boxes {
+   width: 25px;
+   margin: 2px 0 0 5px;
+   position: relative;
+   font-size: 14px;
+}
+
+.boxes label {
+   cursor: pointer;
+   position: absolute;
+   width: 13px;
+   height: 13px;
+   top: 0;
+   left: 0;
+   margin: 2px 0 0 4px;
+   background: #eee;
+   border:1px solid #ddd;
+   border-radius: 5px;
+}
+
+.boxes label img{
+  margin-left: 25px;
+}
+
+.boxes label:after {
+   opacity: 0.2;
+   content: '';
+   position: absolute;
+   width: 6px;
+   height: 3px;
+   background: transparent;
+   top: 2px;
+   left: 2px;
+   border: 3px solid #d64a4a;
+   border-top: none;
+   border-right: none;
+
+   transform: rotate(-45deg);
+}
+
+/**
+ * Create the hover event of the tick
+ */
+.boxes label:hover::after {
+   opacity: 0.5;
+}
+
+/**
+ * Create the boxesbox state for the tick
+ */
+.boxes input[type=checkbox]:checked + label:after {
+   opacity: 1;
+}
+
+/*======================== filters end ============================*/
+#togglebtn{
+  width:50px;
+  float: right;
+}
+/*======================== Detailbar ============================*/
+#d-t-l, #d-t-r, #d-b{
+  width: 45%;
+  float: left;
+  margin-left: 5%;
+  margin-top: 5px;
+  height: 40%;
+}
+
+#d-t-l{
+  height: 35%;
+}
+
+#d-b{
+  width: 95%;
+  height: 47%;
+  margin-left: 10px;
+}
+
+#donut, #line, #word{
+  width: 100%;
+  height: 95%;
+  /*border: 1px dashed #e1e1e1;*/
+}
+
+#detailbar #storename{
+  font-family: 'latoregular';
+  font-size: 30px;
+  /*width: 440px;*/
+  padding: 15px 0px 10px 20px;
+  color:#d64a4a;
+  text-transform: uppercase;
+}
+
+#close{
+  width: 5%;
+  position: absolute;
+  right: 0;
+  opacity: 0.8;
+  font-size: 30px;
+  padding-top: 10px
+}
+
+#close:hover{
+  color: #d64a4a;
+}
+
+
+
+/*======================== Detailbar end ============================*/
+/*===========================  Bar end =================================*/
+.bar {
+   fill:#d64a4a;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #D4D8DA;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+.x path {
+   display: none;
+}
+.toolTip_bar {
+  position: absolute;
+  display: none;
+  max-width: 30px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #e1e1e1;
+  padding: 14px;
+  text-align: center;
+  /*z-index: 50;*/
+}
+
+/*===========================  Bar end =================================*/
+/*===========================  star checkbox =================================*/
+#starfilter {
+  position: relative;
+  margin: 20px auto;
+}
+
+.boxes{
+  width: 100%;
+}
+
+.r-list{
+  height: 100%;
+  float: left;
+}
+
+.r-list .boxes{
+  margin:0 25px 8px 0;
+}
+
+/*===========================  star checkbox end =================================*/
+/*================================  Donut  =========================*/
+ #donut {
+        position: relative;
+        margin-left: 10px;
+}
+
+.tooltipDonut, .tooltipBar {
+  background: #eee;
+  box-shadow: 0 0 5px #999999;
+  color: #333;
+  display: none;
+  font-size: 12px;
+  left: 130px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  top: 95px;
+  width: 80px;
+  z-index: 10;
+}
+
+.legendDonut {
+  font-size: 12px;
+  fill: white;
+}
+
+rect {
+  stroke-width: 2;
+}
+
+.legendWD {
+  border: 1px solid #555555;
+  border-radius: 5px 5px 5px 5px;
+  font-size: 0.8em;
+  margin: 10px;
+  padding: 8px;
+}
+
+.bld {
+  font-weight: bold;
+}
+
+.donutPath{
+  cursor: pointer;
+}
+
+.donutPath:hover{
+  text-shadow: 0 0 20px black;
+}
+/*================================  Donut End =========================*/
+
+/*================================  stack =========================*/
+
+.axis_s path,
+.axis_s line {
+  fill: none;
+  stroke: #D4D8DA;
+  shape-rendering: crispEdges;
+}
+
+.tooltip_stack{
+  text-anchor: middle;
+  font-family: sans-serif;
+  font-size: 12px;
+  fill:#fff;
+}
+
+/*================================  stack End =========================*/
+
+/*================================  stack End =========================*/
+
+
+
+/*======add for bar filter to select ciricle in map */
+
+.selected-bar {
+    fill: orange;
+
+}
+
+
+.cir-notslected{
+    opacity: 0;
+
+}
+.cir-cat-selected {
+    fill:orange;
+    opacity: 1;
+
+}
+
+
+.cir-rev-selected{
+    fill:orange;
+    opacity: 1;
+}
+
+.cir-star-selected {
+    fill:orange;
+    opacity: 1;
+
+}
+
+
+
+/*.cir-mul-selected {*/
+    /*!*fill:#d64a4a;*!*/
+    /*opacity: 1;*/
+
+/*}*/
+
+/*========================tooltip for the circle in map*/
+.toolTipMap {
+    position: absolute;
+    display: none;
+    min-width: 120px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #6F257F;
+    padding: 14px;
+    text-align: center;
+}
