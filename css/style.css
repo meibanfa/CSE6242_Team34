@@ -330,7 +330,20 @@ nav img{
 }
 
 #d-t-l{
-  height: 35%;
+  float: none;
+  height: 45%;
+}
+svg text.legendtext{
+	fill:white;
+	text-anchor:begin;
+	font-size:12px;
+
+}
+
+svg text.percent{
+	fill:white;
+	text-anchor:middle;
+	font-size:12px;
 }
 
 #d-b{
