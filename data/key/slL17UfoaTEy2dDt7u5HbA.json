@@ -1,0 +1,1 @@
+{"name": "key", "children": [{"name": "price", "size": 2}, {"name": "gas", "size": 4}, {"name": "station", "size": 10}, {"name": "inside", "size": 4}, {"name": "customer", "size": 6}, {"name": "car", "size": 8}, {"name": "debit", "size": 5}, {"name": "force", "size": 4}, {"name": "manager", "size": 4}, {"name": "pit", "size": 10}, {"name": "store", "size": 3}]}

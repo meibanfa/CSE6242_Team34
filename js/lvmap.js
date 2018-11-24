@@ -10,16 +10,15 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 	
 	d3.json('data/Las\ Vegas.json', function(error, data){
 		if(error) throw error;
-		data = data.filter(function(d) {
+		/*data = data.filter(function(d) {
 			if(d.categories){
 				if(d.categories.includes("Restaurant")|| d.categories.includes("Food")){
 					return !isNaN(d.longitude) & !isNaN(d.latitude);
 				}
 			}
 			return false;
-		});
+		});*/
 		data.forEach(function(d){
-			console.log(1);
 			d.LatLng = new L.LatLng(d.latitude, d.longitude);
 		});
 		var circleBind = circleGroup.selectAll("g")
@@ -31,13 +30,17 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 		.attr("r", 5)
 		.attr("class", "circleMap")
 		.on('click',function(d){
+			remove();
 			d3.select('#detailbar').style('display', 'block');
 			d3.select('#storename').html(d.name);
 			d3.select('#storeaddress').html(d.address);
 			d3.select('#d-t-rating').html('· Average Rating:\t\t'+d.stars);
+			d3.select('#d-t-keyword').html('· Keywords');
 			drawdonut(d);
-//			chosen(d);
-//			stack(d.business_id);
+			d3.select("#keywords").selectAll("g").remove();
+			drawkeyword(d);
+			//chosen(d);
+			//stack(d.business_id);
 			console.log(d.business_id);
 		});
 
@@ -51,8 +54,79 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 		leafletMap.on("viewreset", updateMap);
 		updateMap();
 	});
+var dd = [0,0,0,0,0];
+var keyword = ["","","","","","","","","",""];
+var salesData=[
+	{label:"one", color:"#3366CC"},
+	{label:"two", color:"#DC3912"},
+	{label:"three", color:"#FF9900"},
+	{label:"four", color:"#109618"},
+	{label:"five", color:"#990099"}
+];
+function remove(){
+	d3.select("#keywords").selectAll("g").remove();
+	
+}
+function getData(){
+	return salesData.map(function(d, i){
+		return {label:d.label, value:dd[i], color:d.color};});
+}
+// Returns a flattened hierarchy containing all leaf nodes under the root.
+function flatten(root) {
+  var nodes = [];
+
+  function recurse(node) {
+    if (node.children) node.children.forEach(recurse);
+    else nodes.push({name: node.name, value: node.size});
+  }
+
+  recurse(root);
+  return {children: nodes};
+}
+function drawkeyword(d){
+	var bleed = 100,
+    width = 250,
+    height = 250;
+	var pack = d3.layout.pack()
+	    .sort(null)
+		.size([width, height + bleed * 2])
+	    .padding(2);
+	var svg=d3.select("#keywords")
+		.attr("width", width)
+		.attr("height", height)
+		.append("g")
+	    .attr("transform", "translate(0," + -bleed + ")");
+	var keywords_file="data/key/"+d.business_id+".json";
+	d3.json(keywords_file, function(error, json) {
+		if (error) throw error;
+
+		var node = svg.selectAll(".node")
+			.data(pack.nodes(flatten(json))
+			.filter(function(d) { return !d.children; }))
+			.enter().append("g")
+			.attr("class", "node")
+			.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+		node.append("circle")
+			.attr("fill", 'grey')
+			.attr("r", function(d) { return d.r; });
+
+		node.append("text")
+			.text(function(d) { return d.name; })
+			.attr("class", "keyword")
+			.style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 20) + "px"; })
+			.attr("dy", ".35em");
+	});	
+	
+}
 function drawdonut(d){
-	Donut3D.draw("donut", randomData(), 100, 120, 90, 75, 30, 0.4);
+	var review_cnt="data/stars/"+d.business_id+".csv";
+    d3.csv(review_cnt, function(error, dataset) {
+		dataset.forEach(function(d, i) {
+			dd[i]=d.count;
+		})
+		Donut3D.draw("donut", getData(), 100, 120, 90, 75, 30, 0.4);
+	});
 	var legend = d3.select("#donut").selectAll(".legend")
 		.data(salesData)
 		.enter().append("g")
@@ -71,17 +145,6 @@ function drawdonut(d){
 		.text(function(d){ return d.label;});
 }
 
-var salesData=[
-	{label:"one", color:"#3366CC"},
-	{label:"two", color:"#DC3912"},
-	{label:"three", color:"#FF9900"},
-	{label:"four", color:"#109618"},
-	{label:"five", color:"#990099"}
-];
-function randomData(){
-	return salesData.map(function(d){
-		return {label:d.label, value:1000*Math.random(), color:d.color};});
-}
 function chosen(d){
 	(function(d3) {
 		'use strict';
