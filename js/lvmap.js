@@ -166,7 +166,7 @@ function appendpics(){
 							if (i==0) return "30";
 							else return "320";
 		})
-        .attr("y", "30")
+        .attr("y", "10")
         .attr("width", "210")
         .attr("height", "210");
 }
