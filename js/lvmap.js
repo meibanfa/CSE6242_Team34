@@ -36,6 +36,7 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 			d3.select('#storeaddress').html(d.address);
 			d3.select('#d-t-rating').html('· Average Rating:\t\t'+d.stars);
 			d3.select('#d-t-keyword').html('· Keywords');
+			d3.select('#d-t-imgwords').html('· Selected Pictures');
 			drawdonut(d);
 			d3.select("#keywords").selectAll("g").remove();
 			drawkeyword(d);
@@ -151,7 +152,7 @@ function appendpics(){
     var src1 = "data/yelp_photos/yelp_academic_dataset_photos/ddInj8TpFIcsI6Nv3o2rgQ.jpg";
 	var src2 = "data/yelp_photos/yelp_academic_dataset_photos/bbbTygqirJqd32W1pQHlNg.jpg";
 //	document.body.append
-    var svg=d3.select("#d-t-images").select("#stack")
+    var svg=d3.select("#d-b").select("#stack")
 		.attr("width", width)
 		.attr("height", height);
 	var imgs=svg.selectAll("image").data([0,0]);
@@ -162,10 +163,10 @@ function appendpics(){
 							else return src2;
 		}) 
         .attr("x", function(d,i){ 
-							if (i==0) return "50";
-							else return "330";
+							if (i==0) return "30";
+							else return "320";
 		})
         .attr("y", "30")
-        .attr("width", "200")
-        .attr("height", "200");
+        .attr("width", "210")
+        .attr("height", "210");
 }
