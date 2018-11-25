@@ -39,8 +39,9 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 			d3.select('#d-t-imgwords').html('· Selected Pictures');
 			drawdonut(d);
 			d3.select("#keywords").selectAll("g").remove();
+			d3.selectAll("image").remove();
 			drawkeyword(d);
-			appendpics();
+			appendpics(d);
 
 			console.log(d.business_id);
 		});
@@ -145,12 +146,20 @@ function drawdonut(d){
 		.attr("class", "legendtext")
 		.text(function(d){ return d.label;});
 }
-function appendpics(){
+function appendpics(d){
     var width = 600;
     var height = 300;
 	var bleed=0;
-    var src1 = "data/yelp_photos/yelp_academic_dataset_photos/ddInj8TpFIcsI6Nv3o2rgQ.jpg";
-	var src2 = "data/yelp_photos/yelp_academic_dataset_photos/bbbTygqirJqd32W1pQHlNg.jpg";
+	var srcfile="data/photo/"+d.business_id;
+    var src1 =null;//= "data/yelp_photos/yelp_academic_dataset_photos/ddInj8TpFIcsI6Nv3o2rgQ.jpg";
+	var src2 =null;//= "data/yelp_photos/yelp_academic_dataset_photos/bbbTygqirJqd32W1pQHlNg.jpg";
+	d3.csv(srcfile, function(d){
+		if(d.length>=1){
+			src1="data/yelp_photos/yelp_academic_dataset_photos/"+d[0].photo+".jpg";
+		}
+		if(d.length>=2){
+			src2="data/yelp_photos/yelp_academic_dataset_photos/"+d[1].photo+".jpg";
+		}
 //	document.body.append
     var svg=d3.select("#d-b").select("#stack")
 		.attr("width", width)
@@ -169,4 +178,5 @@ function appendpics(){
         .attr("y", "10")
         .attr("width", "210")
         .attr("height", "210");
+	})
 }
