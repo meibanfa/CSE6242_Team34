@@ -4,7 +4,7 @@ var bar = d3.select("#cates_filter"),
     b_h = +bar.attr("height") - margin_bar.top - margin_bar.bottom;
 
 var x_bar = d3.scale.linear().range([0, b_w]);
-var y_bar = d3.scaleBand().rangeRound([b_h, 0]);
+var y_bar = d3.scale.ordinal().rangeBands([b_h, 0], 0.1);
 
 var g = bar.append("g")
       .attr("transform", "translate(" + margin_bar.left + "," + margin_bar.top + ")");
@@ -13,13 +13,14 @@ d3.csv("data/business-100-categ-frequence.csv", function(error, data) {
    if (error) throw error;
 
    data.sort(function(a, b) { return a.count - b.count; });
+    console.log(data);
 
    x_bar.domain([50, 1250]).nice();
-   y_bar.domain(data.filter(function(d){ return d.count >= 100;}).map(function(d) { return d.categs; })).padding(0.1);
+   y_bar.domain(data.filter(function(d){ return d.count >= 100;}).map(function(d) { return d.categs; }));
 
     g.append("g")
         .attr("class", "x_bar axis")
-         .call(d3.axisTop(x_bar))
+        .call(d3.svg.axis().orient("top").scale(x_bar))
           .selectAll("text")
       .attr("dx", "0.7em")
       .attr("dy", ".5em")
@@ -30,7 +31,7 @@ d3.csv("data/business-100-categ-frequence.csv", function(error, data) {
 
     g.append("g")
         .attr("class", "y_bar axis")
-        .call(d3.axisLeft(y_bar))
+        .call(d3.svg.axis().orient("left").scale(y_bar))
         .selectAll("text")
       .style("text-anchor", "end")
       .style("fill", "#fff")
@@ -44,7 +45,7 @@ d3.csv("data/business-100-categ-frequence.csv", function(error, data) {
             return d.categs.split(' ').join('-');
         })
         .attr("x", 0)
-        .attr("height", y_bar.bandwidth())
+        .attr("height", y_bar.rangeBand())
         .attr("y", function(d) { return y_bar(d.categs); })
         .attr("width", function(d) { return x_bar(d.count); });
 
