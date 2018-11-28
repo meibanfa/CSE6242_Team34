@@ -18,11 +18,15 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 			}
 			return false;
 		});*/
+
+    // Assign data globally!!
+    window.las_vegas_data = data;
+
 		data.forEach(function(d){
 			d.LatLng = new L.LatLng(d.latitude, d.longitude);
 		});
 		var circleBind = circleGroup.selectAll("g")
-		.data(data);
+		    .data(data, d => d.business_id);
 		var mapCircles = circleBind.enter()
 		.append("g")
 		.append("circle")
@@ -48,10 +52,44 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
 
 
 		function updateMap() {
-			mapCircles.attr("transform",function(d) {
-				return "translate("+leafletMap.latLngToLayerPoint(d.LatLng).x +","+leafletMap.latLngToLayerPoint(d.LatLng).y +")";
-			});
+        console.log("-- updateMap --");
+
+        // Global variable
+        las_vegas_data;
+
+        var new_data = star_filter(las_vegas_data);
+        var circleBind = circleGroup.selectAll("g")
+            .data(new_data, d => d.business_id);
+
+		    circleBind.enter()
+		        .append("g")
+		        .append("circle")
+		        .attr("pointer-events", "visible")
+		        .attr("r", 5)
+		        .attr("class", "circleMap")
+		        .on('click',function(d){
+			          remove();
+			          d3.select('#detailbar').style('display', 'block');
+			          d3.select('#storename').html(d.name);
+			          d3.select('#storeaddress').html(d.address);
+			          d3.select('#d-t-rating').html('· Average Rating:\t\t'+d.stars);
+			          d3.select('#d-t-keyword').html('· Keywords');
+			          d3.select('#d-t-imgwords').html('· Selected Pictures');
+			          drawdonut(d);
+			          d3.select("#keywords").selectAll("g").remove();
+			          d3.selectAll("image").remove();
+			          drawkeyword(d);
+			          appendpics(d);
+
+			          console.log(d.business_id);
+		        });
+        circleBind.exit().remove();
+        circleBind
+            .attr("transform", function(d) {
+				        return "translate("+leafletMap.latLngToLayerPoint(d.LatLng).x +","+leafletMap.latLngToLayerPoint(d.LatLng).y +")";
+            });
 		}
+    window.updateMap = updateMap;
 
 		leafletMap.on("viewreset", updateMap);
 		updateMap();

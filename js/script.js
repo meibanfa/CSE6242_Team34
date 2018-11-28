@@ -34,14 +34,3 @@ reset.addEventListener('click', function(){
 
 // *********************** show/hide sidebar end *****************************
 
-// *********************** checkbox status *****************************
-function toggleCheckbox(element){
-   if (element.checked) {
-      element.setAttribute("checked", "checked");
-      selectBoxs(element);
-   } else {
-      element.setAttribute("checked", "");
-      unselectBoxs(element);
-   }
-}
-// *********************** checkbox status *****************************
