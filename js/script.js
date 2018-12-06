@@ -24,6 +24,8 @@ reset.addEventListener('click', function(){
    }
    window.star_state.clear();
    window.review_state.clear();
+   if (window.updateMap)
+       window.updateMap();
 
    d3.selectAll('.circleMap').style("opacity", 1);
    d3.selectAll('.cir-star-selected').class('cir-star-selected', false);
