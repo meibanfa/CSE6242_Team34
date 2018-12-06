@@ -22,6 +22,8 @@ reset.addEventListener('click', function(){
                document.getElementsByName("check")[i].checked = false;
            }
    }
+   window.star_state.clear();
+   window.review_state.clear();
 
    d3.selectAll('.circleMap').style("opacity", 1);
    d3.selectAll('.cir-star-selected').class('cir-star-selected', false);

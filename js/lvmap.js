@@ -57,7 +57,7 @@ L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
         // Global variable
         las_vegas_data;
 
-        var new_data = star_filter(las_vegas_data);
+        var new_data = review_filter(star_filter(las_vegas_data));
         var circleBind = circleGroup.selectAll("g")
             .data(new_data, d => d.business_id);
 

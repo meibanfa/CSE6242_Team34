@@ -40,6 +40,37 @@ function star_filter(data) {
     return ans;
 }
 
+function review_filter(data) {
+    if (window.review_state === undefined)
+        console.error("should not happen");
+
+    let review_state = window.review_state;
+    if (!review_state.size)
+        return data;
+
+    const range_map = {
+        1: [3500 , 4500],
+        2: [3000 , 3500],
+        3: [2500 , 3000],
+        4: [2000 , 2500],
+        5: [1500 , 2000],
+        6: [1000 , 1500],
+        7: [500 , 1000],
+        8: [100 , 500]
+    };
+
+    let ans = data.filter(d => {
+        for (let review_sel of review_state) {
+            let range = range_map[review_sel];
+            if (d.review_count >= range[0] && d.review_count <= range[1])
+                return true;
+        }
+        return false;
+    });
+
+    return ans;
+}
+
 var star_state = new Set();
 var review_state = new Set();
 
