@@ -193,10 +193,10 @@ function appendpics(d){
 	var src2 =null;//= "data/yelp_photos/yelp_academic_dataset_photos/bbbTygqirJqd32W1pQHlNg.jpg";
 	d3.csv(srcfile, function(d){
 		if(d.length>=1){
-			src1="data/yelp_photos/yelp_academic_dataset_photos/"+d[0].photo+".jpg";
+			src1="data/real_photo/"+d[0].photo+".jpg";
 		}
 		if(d.length>=2){
-			src2="data/yelp_photos/yelp_academic_dataset_photos/"+d[1].photo+".jpg";
+			src2="data/real_photo/"+d[1].photo+".jpg";
 		}
 //	document.body.append
     var svg=d3.select("#d-b").select("#stack")
