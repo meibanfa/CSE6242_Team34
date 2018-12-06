@@ -1,0 +1,3 @@
+DESCRIPTION - There are 3 indenpentent html file in CSE6242_Team34 directory, user can open each one by click to html file. The data folder contains all the data we needed for this project. We don't put pictures in our data file, so you need first download our picture file(about 300m). Other part are shown by its name, like js, css, folders.
+INSTALLATION - Open CSE6242_Team34 directory, download our pictures from link "https://gatech.box.com/s/2hjglf3d6ot3ne9311bpypx7tihhy2yo", put "real_photo" folder in data directory.
+EXECUTION - Use SimpleHTTPServer command line(like: python -m SimpleHTTPServer 8080) to build a server in CSE6242_Team34 directory, then open web browser and input 127.0.0.1:8080, you can see our results by clicking on html files.
